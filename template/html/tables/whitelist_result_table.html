@@ -1,0 +1,33 @@
+
+    <div class="card">
+        <div class="col"><h5 class="card-header">Whitelist Result</h5></div>
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Channel Name</th>
+                <th>Video Title</th>
+                <th>Published At</th>
+                <th>Views</th>
+                <th>Subscriber Count</th>
+                <th>Video url</th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              {% for result in whitelist_result %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><strong><a href="https://www.youtube.com/channel/{{result.snippet.channelId}}">{{result.snippet.channelTitle}}</a></strong></td>
+                <td>{{result.snippet.title}}</td>
+                <td>{{result.snippet.publishedAt}}</td>
+                <td>{{result.statistics.viewCount}}</td>
+                <td>{{result.channel_details.subscriberCount}}</td>
+                <td><a id="youtube_link" href="https://www.youtube.com/watch?v={{result.id}}" target="_blank"><i class='bx bx-link-external'></i></a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <hr class="my-1">

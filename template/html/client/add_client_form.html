@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} page title {% endblock %}
+
+{% block content %}
+{% if positive_Notification_data %}
+<!-- Notification -->
+<div class="alert alert-success alert-dismissible" role="alert">
+    {{positive_Notification_data.client_name}} has been created
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+{% if negative_Notification_data %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{negative_Notification_data.client_name}} is already present
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+
+{% if invalidUrl_list %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {% for url in invalidUrl_list %}
+        <a href="{{url}}" target="_blank">{{url}}</a><br>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+<!-- Notification -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">Add Client</h5>
+                      <!--small class="text-muted float-end">Add Client</small-->
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Client</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="defaultFormControlInput" placeholder="Client Name" aria-describedby="defaultFormControlHelp" name="client_name">
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

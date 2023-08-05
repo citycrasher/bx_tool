@@ -1,0 +1,27 @@
+
+    <div class="card">
+        <div class="col"><h5 class="card-header">Invalid Result</h5></div>
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Channel Name</th>
+                <th>Video Title</th>
+                <th>Video url</th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              {% for result in invalid_result %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><strong>{{result.snippet.channelTitle}}</strong></td>
+                <td>{{result.snippet.title}}</td>
+                <td><a href="https://www.youtube.com/watch?v={{result.id}}" target="_blank"><i class='bx bx-link-external'></i></a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <hr class="my-1">

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} page title {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">Search result for {{search_key}} ...  | <small> Total result found : {{video_url_result |length}}<small></h5>
+                      <small class="float-end">
+                          <a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top"
+                          data-bs-html="true" data-bs-original-title="Download as CSV" href="#">
+                              <i class='bx bxs-download'></i>&nbsp;
+                            </a>
+                      </small>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr class="text-nowrap">
+                        <th>#</th>
+                        <th>Video Title</th>
+                        <th>Channel Name</th>
+                        <th>Views</th>
+                        <th>Subscriber count</th>
+                        <th>Added By</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for result in video_url_result %}
+                      <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td><a href="{{ result.video_url }}">{{ result.content_title }}</a></td>
+                          <td><a href="{{channel_url}}">{{ result.channel_name }}</a></td>
+                          <td>{{ result.views }}</td>
+                          <td>{{ result.channel_sub_count }}</td>
+                          <td>{{ result.added_by }}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

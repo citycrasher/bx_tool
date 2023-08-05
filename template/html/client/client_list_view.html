@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} page title {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header"> this is blank temmplate</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                      <!--small class="text-light fw-semibold">Numbered</small-->
+                      <div class="demo-inline-spacing mt-3">
+                        <ol class="list-group list-group-numbered">
+                            {% for client in clients %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'youtube:client_based_whitelist' client %}">{{client}}</a>
+
+                                </li>
+                            {% endfor %}
+                        </ol>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
