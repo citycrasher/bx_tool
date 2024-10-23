@@ -1,0 +1,114 @@
+<html>
+<head>
+<style>
+     @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 40pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 40pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 40pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+</style>
+
+<head>
+<body>
+<script type="application/json" id="data-values">
+    {{ labels|json_script:"data_values" }}
+</script>
+    <h1 id="header_content">IP REPORT | {{movie_obj.client}} | {{movie_obj.movie_name}}</h1>
+
+
+    <canvas type="graph" width="350" height="150">
+      {
+            "data": {{ data_point }},
+            "labels":   ["PENDING", "REMOVED", "REPORTED"],
+            "title": {"_text": "{{movie_obj.client}} | {{movie_obj.movie_name}}", "x": 350, "y": 170},
+            "type": "pie",
+            "x": 150, "y": 50,
+            "barLabelFormat": "%2.0f",
+            "bars": {"strokeColor": "#f01f34"},
+            "barLabels": {"nudge": 5},
+            "categoryAxis": {"strokeColor": "#f01f34"},
+            "slices": [
+                {"fillColor": "#FF0000", "strokeColor": "#080808", "strokeWidth": 2},
+                {"fillColor": "#00FF00", "strokeColor": "#080808", "strokeWidth": 2},
+                {"fillColor": "#0000FF", "strokeColor": "#080808", "strokeWidth": 2}
+            ],
+            "legend": {
+                  "alignment": "right",
+                  "boxAnchor": "nw",
+                  "fontSize": 8,
+                  "strokeWidth": 0,
+                  "dy": 6,
+                  "dx": 6,
+                  "dxTextSpace": 4,
+                  "deltay": 6,
+                  "columnMaximum": 99,
+                  "variColumn": 1,
+                  "deltax": 175,
+                  "x": 350,
+                  "y": 125
+            }
+
+      }
+    </canvas>
+
+
+
+
+    <table border=".5" style="border-collapse: collapse; width: 100%;">
+      <thead>
+        <tr>
+          <th style="width: 10%;text-align: center; padding: 3px;">Date</th>
+          <th style="width: 15%text-align: center; padding: 3px;">Report ID</th>
+          <th style="width: 15%text-align: center; padding: 3px;">Request ID</th>
+          <th style="width: 15%;text-align: center; padding: 3px;">Original Work</th>
+          <th style=" text-align: center; padding: 3px;">Report URL</th>
+          <th style="width: 10%;text-align: center; padding: 3px;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for data in datas %}
+      <tr>
+                        <td style="text-align: center;padding: 1px;">{{data.time_stamp}}</td>
+                        <td style="text-align: center;">{{data.report_id}}</td>
+                        <td style="text-align: center;">
+                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{data.request_id}}</strong>
+                        </td>
+                        <td style="text-align: center;">{{data.original_type}}</td>
+                        <td style="text-align: center;"><a href="{{ data.report_url }}">
+                            {% if data.report_url|length > 40 %}
+                                {{ data.report_url|slice:":40" }}...
+                            {% else %}
+                                {{ data.report_url }}
+                            {% endif %}
+                            </a>
+                        </td>
+                        <td style="text-align: center;">{% if data.status == 'PENDING' %}
+                            <span class="badge bg-label-danger me-1">{{data.status}}</span>
+                            {% elif data.status == 'REMOVED' %}
+                              <span class="badge bg-label-success me-1">REMOVED</span>
+                            {% elif data.status == 'REPORTED' %}
+                              <span class="badge bg-label-warning me-1">REPORTED</span>
+                            {% endif %}
+                        </td>
+                        </tr>
+    {% endfor %}
+
+  </tbody>
+    </table>
+
+    <div id="footer_content">BLOCK X - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>
+
+</body>
+</html>
+

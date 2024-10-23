@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %} IP Report {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header"> this is IP Report</h5>
+            </div>
+            <div class="card-body">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Client</label>
+                            <div class="col-md-10">
+                                <select id="client" class="form-select" name="client">
+                                  <option>Select Client</option>
+                                  {% for client in clients %}
+                                    <option value="{{client.id}}">{{client}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Movie</label>
+                            <div class="col-md-10">
+                                <select id="movie" class="form-select" name="movie">
+                                  <option>Select Movie</option>
+                                    <option value="{{client.id}}">{{client}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                 <div class="card">
+<!--                     <h5 class="card-header">Small Table</h5>-->
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-hover display table-responsive text-nowrap" id="clientTable" >
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Request ID</th>
+                        <th>Report ID</th>
+                        <th>original work</th>
+                        <th>original_type</th>
+                        <th>status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    <!-- asdf -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var ajaxGetMoviesListUrl = '{% url "ip_reporting:ajax_get_movies_list" %}';
+    var ajaxGetReportBasedOnMovie = '{% url "ip_reporting:ajax_get_report_forMovie" %}';
+    var result_data = [];
+    $(document).ready(function() {
+
+    // get movie list
+    $('#client').change(function() {
+        var clientId = $(this).val();
+        console.log("get movie", "ajaxGetMoviesListUrl");
+        if (clientId) {
+            $.ajax({
+                url: ajaxGetMoviesListUrl,
+                data: {
+                    'client_id': clientId
+                },
+                success: function(data) {
+                    $('#movie').empty();
+                    $('#movie').append('<option value="">Select Movie</option>');
+                    $.each(data, function(key, value) {
+                        $('#movie').append('<option value="' + value.id + '">' + value.movie_name + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#movie').empty();
+            $('#movie').append('<option value="">Select movie</option>');
+        }
+    }); // end of ajax
+
+    var clientTable = $('#clientTable').DataTable({
+        "dom": 'Bfrtip',  // Place buttons before the search box
+        "buttons": [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "data":[] ,
+        "columns": [
+            { "data": null, // No data for serial number, it will be auto-calculated
+            "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1; // Serial number calculation
+                }
+            },
+            {"data": "request_id"},
+            {"data": "report_id"},
+            {
+            "data": "report_url",
+            "width": "5%",
+            "render": function(data, type, row, meta) {
+            // Check if the data is a valid URL
+                    if (data) {
+                        return '<a href="' + data + '" class="your-custom-class" target="_blank">' +'<i class="bx bx-sm bx-link-alt bx-tada-hover" ></i>' +'</a>';
+                    } else {
+                        return '--';
+                    }
+            }
+            },
+            {"data":"original_type", },
+            {
+            "data":"status",
+            "render": function(data, type, row, meta){
+                if (data == "REMOVED"){return '<span class="badge bg-label-success me-1">REMOVED</span>'}
+                else if(data == "PENDING") { return '<span class="badge bg-label-warning me-1">Pending</span>' }
+                else { return data }
+                }
+            }
+        ],
+        "language": {
+            "emptyTable": "No data available in table",  // Message displayed when no data is available
+            "zeroRecords": "No matching records found",  // Message displayed when no records match the filter
+        },
+        "paging": true,  // Enable paging
+        "processing": true,  // Show processing indication
+        "serverSide": false,  // If you handle data on the client-side
+        "deferRender": true  // Improves performance for large datasets
+    }); // end of datatable
+
+        // get report based on client and movie
+    $('#movie').change(function() {
+            var movieId = $(this).val();
+            console.log("get report", "ajaxGetMoviesListUrl");
+            if (movieId) {
+                $.ajax({
+                    url: ajaxGetReportBasedOnMovie,
+                    data: {
+                        'movie_id': movieId
+                    },
+                success: function(data) {
+                     console.log(data);
+                     clientTable.clear().draw(); // Clear previous data
+                    if (Array.isArray(data.data) && data.data.length > 0) {
+                        clientTable.rows.add(data.data).draw(); // Add and draw new data
+                    } else {
+                        console.log("No data available for the selected movie.");
+                    }
+                },
+                error: function(xhr, status, error) {console.error("AJAX request failed:", status, error);  }
+            });
+        }
+    }); // end of ajax
+
+});
+
+</script>
+{% endblock %}

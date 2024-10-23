@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %} IP Reporting {% endblock %}
+
+{% block content %}
+<!--{% if valid_url_count %}-->
+<!--&lt;!&ndash; Notification &ndash;&gt;-->
+<!--<div class="alert alert-success alert-dismissible" role="alert">-->
+<!--    {{valid_url_count}} has been added-->
+<!--    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--</div>-->
+
+<!--{% endif %}-->
+
+<!--{% if invalid_data %}-->
+<!--    <div class="alert alert-danger alert-dismissible" role="alert">-->
+<!--        Enter a valid data-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--{% endif %}-->
+
+<!--{% if invalidUrl_list %}-->
+<!--    <div class="alert alert-danger alert-dismissible" role="alert">-->
+<!--        {% for url in invalidUrl_list %}-->
+<!--        <a href="{{url}}" target="_blank">{{url}}</a><br>-->
+<!--        {% endfor %}-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--    </div>-->
+<!--{% endif %}-->
+<!-- Notification -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">General Meta IP Report Tool</h5>
+<!--                      <small class="text-muted float-end"><a href="{% url 'youtube:add_client_view' %}">Add Client</a></small>-->
+                </div>
+                <div>
+
+                </div>
+                <div class="card-body" id="ip-reporting-form">
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Client</label>
+                            <div class="col-md-10">
+                                <input name="OwnerName" type="text" class="form-control" id="defaultFormControlInput" placeholder="Owner Name" aria-describedby="defaultFormControlHelp" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Movie</label>
+                            <div class="col-md-10">
+                                <input name="MovieName" type="text" class="form-control" id="defaultFormControlInput" placeholder="Movie Name" aria-describedby="defaultFormControlHelp" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="originalUrl" class="col-md-2 col-form-label">Original Work URL</label>
+                            <div class="col-md-10">
+                                <input name="originalUrl" type="text" class="form-control" id="originalUrl" placeholder="Only 1 Url" aria-describedby="defaultFormControlHelp" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Original Type</label>
+                            <div class="col-md-10">
+                                <select id="original_type" class="form-select" name="original_type" required>
+                                  <option value="VIDEO">VIDEO</option>
+                                  <option value="PHOTO">PHOTO</option>
+                                  <option value="ARTWORK">ARTWORK</option>
+                                  <option value="OTHER">OTHER</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="md-3 row">
+                            <div class="nav-align-top mb-4">
+                                <ul class="nav nav-tabs nav-fill" role="tablist">
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-home" aria-controls="navs-justified-home" aria-selected="true">
+                                          <i class='bx bx-clipboard' ></i> Clipboard
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-profile" aria-controls="navs-justified-profile" aria-selected="false">
+                                          <i class='bx bx-upload' ></i> Upload .text File
+                                        </button>
+                                    </li>
+                                </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
+                                <div class="mb-3">
+                                  <label class="form-label" for="basic-default-message">Urls</label>
+                                  <textarea id="url_input" name="input_urls" class="form-control" placeholder="Paste your Urls here..."></textarea>
+                                </div>
+                            </div>
+                            <!-- UPload file -->
+                        <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Select file</label>
+                                <input class="form-control" type="file" id="inputFile" name="txt_file" accept=".txt">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button id="send-button" type="submit" class="btn btn-primary">Send</button>
+                                <!--<button type="submit" id="send-button" class="btn btn-primary">Send</button>-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+<!--<script>-->
+<!--    var ajaxGetMoviesListUrl = '{% url "ip_reporting:ajax_get_movies_list" %}';-->
+<!--    var ajaxPostFormIpReportUrl = '{% url "ip_reporting:ajax_post_form_ip_report" %}';-->
+
+<!--</script>-->
+{% endblock %}

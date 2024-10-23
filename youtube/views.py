@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.db.utils import IntegrityError
 from . import youtube_API
 from .forms import Youtube_whitelist_form
-from .models import Client, youtube_whitelist, Youtube_Url_Model, User_url_report
+from .models import Client, youtube_whitelist, Youtube_Url_Model
+from accounts.models import User_url_report
 from .validators import check_youtube_urls
 import csv
 from django.contrib.auth.decorators import login_required
@@ -10,19 +11,14 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def test_view(request):
-    return render(request=request, template_name='youtube/youtube_filter_results.html')
 @login_required
 def home_view(request):
     return render(request=request, template_name='home.html')
 
 @login_required
 def search(request):
-    print("search .....")
     if request.method == "GET":
         search_key = request.GET.get('key')
-        print("key ", search_key)
-
         video_url_result = Youtube_Url_Model.objects.filter(video_url__contains=search_key)
         # channel_url_result = Youtube_Url_Model.objects.filter(channel_url__contains=search_key)
         # channel_name_result = Youtube_Url_Model.objects.filter(channel_name__contains=search_key)
@@ -96,7 +92,6 @@ def youtube_filter(request):
         report_user_result(request, new=len(new_results), duplicate=len(duplicate_result),
                            whitelisted=len(white_listed_result), invalid_url=len(invalid_results))
         user_stat = {"new":len(new_results), "duplicate":len(duplicate_result), "white_list":len(white_listed_result), "invalid":len(invalid_results)}
-        print(user_stat['white_list'])
         context = {"Infringing_results": new_results, "whitelist_result": white_listed_result,
                    "invalid_result": invalid_results, "duplicate_result" : duplicate_result , "user_stat":user_stat}
         return render(request=request, template_name='youtube/youtube_filter_results.html', context=context)

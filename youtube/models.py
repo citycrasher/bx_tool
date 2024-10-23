@@ -2,11 +2,44 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class AppConfig(models.Model):
+    company_name = models.CharField(max_length=30, unique=True)
+    company_address = models.CharField(max_length=250)
+    company_legal_email = models.CharField(max_length=50)
+    ip_reporting_template = models.TextField()
+    Environment_CHOICES = [
+        ('PROD', 'Production'),
+        ('DEV', 'Development'),
+    ]
+
+    environment = models.CharField(max_length=10, choices=Environment_CHOICES, default='DEV')
+    def __str__(self):
+        return self.company_name
+
+class Services(models.Model):
+    services_name = models.CharField(max_length=100, unique=True)
+    def __str__(self):
+        return self.services_name
+
 class Client(models.Model):
     client_name = models.CharField(max_length=30, unique=True)
-
+    services = models.ManyToManyField(Services, blank=True)
+    client_country = models.CharField(max_length=10)
     def __str__(self):
         return self.client_name
+
+
+class Movie(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    movie_name = models.CharField(max_length=50)
+    original_work = models.TextField()
+    email = models.EmailField()
+    created_at = models.DateField(auto_now_add=True)  # Set on creation
+    updated_at = models.DateField(auto_now=True)
+
+
+    def __str__(self):
+        return self.movie_name
 
 class youtube_whitelist(models.Model):
     channel_title = models.CharField(max_length=30)
@@ -32,12 +65,28 @@ class Youtube_Url_Model(models.Model):
     def __str__(self):
         return self.video_url
 
-class User_url_report(models.Model):
-    user        = models.ForeignKey(User, on_delete=models.CASCADE)
-    new         = models.IntegerField(default=0)
-    duplicate   = models.IntegerField(default=0)
-    whitelisted = models.IntegerField(default=0)
-    invalid_url = models.IntegerField(default=0)
+
+
+class IP_Report(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    report_url = models.CharField(max_length=1500, unique=True)
+    Report_CHOICES = [
+        ('COPYRIGHT', 'Copyright'),
+        ('TRADEMARK', 'Trademark')
+    ]
+    report_type = models.CharField(max_length=10, choices=Report_CHOICES, default='COPYRIGHT')
+    original_type = models.CharField(max_length=15,default="") # pic , video
+    report_id = models.IntegerField(default=0)
+    request_id = models.IntegerField(default=0)
+    Status_CHOICES = [
+        ('REPORTED', 'Reported'),
+        ('PENDING', 'Pending'),
+        ('REMOVED', 'Removed'),
+    ]
+    status = models.CharField(max_length=10, choices=Status_CHOICES, default='PENDING')
+    time_stamp = models.DateField(auto_now_add=True)  # Set on creation
 
     def __str__(self):
-        return self.user.username
+        return "{} | {} | {}".format(self.client, self.movie ,self.report_url)
+

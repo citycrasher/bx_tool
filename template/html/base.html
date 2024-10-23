@@ -1,20 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
->
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+  data-assets-path="../assets/" data-template="vertical-menu-template-free">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
     <title>BX | {% block title %} {% endblock %}</title>
 
@@ -52,6 +44,22 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{% static 'assets/js/config.js' %}"></script>
+       <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.min.css">
+      <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Boxicons JS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/dist/boxicons.js' >
+
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
   </head>
 
   <body>
@@ -73,23 +81,37 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-
+              <!-- toast starts -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade top-0 end-0 hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold">Notification</div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">msg</div>
+              </div>
+              <!-- toast ends -->
               {% block content %} <h1> this is base </h1> {% endblock %}
             </div>
             <!-- / Content -->
 
-            <!-- Footer
+            <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
+                <div class="mb-2 mb-md-0">Copyright
                   ©
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
+                  <a href="https://blockxtech.com/" target="_blank">BLOCKX TECH</a>. All Rights Reserved.
+                </div>
+                <div>
+                  <a href="https://blockxtech.com/privacy-policy/" class="footer-link me-4" target="_blank">Privacy Policy</a>
+                  <a href="https://blockxtech.com/disclaimer-policy/" class="footer-link me-4" target="_blank">Disclaimer Policy</a>
                 </div>
               </div>
             </footer>
-            -->
+
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -102,7 +124,8 @@
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-
+    {% block script %} ----- {% endblock %}
+    <script src="{% static 'assets/js/bx_custom.js' %}"></script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{% static 'assets/vendor/libs/jquery/jquery.js' %}"></script>
@@ -124,6 +147,11 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
 
     <!-- BX custom js scripts-->
     <script src="{% static 'assets/js/custom.js' %}"></script>

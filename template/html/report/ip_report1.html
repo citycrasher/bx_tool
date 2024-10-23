@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} IP Reporting {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">IP Report </h5>
+                      <small class="text-muted float-end"><a href="{% url 'youtube:add_client_view' %}">Add Client</a></small>
+                </div>
+                <div>
+
+                </div>
+                <div class="card-body">
+                    <form id="ip_report_form" method="POST" action="{% url 'ip_reporting:ip_report_result_view' %}">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Client</label>
+                            <div class="col-md-10">
+                                <select id="client" class="form-select" name="client">
+                                    <option>Select Client</option>
+                                    {% for client in clients %}
+                                    <option value="{{client.id}}">{{client}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="html5-text-input" class="col-md-2 col-form-label">Movie</label>
+                            <div class="col-md-10">
+                                <select id="movie" class="form-select" name="movie">
+                                    <option>Select Movie</option>
+                                    <option value="{{client.id}}">{{client}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var ajaxGetMoviesListUrl = '{% url "ip_reporting:ajax_get_movies_list" %}';
+    var ajaxPostFormIpReportUrl = '{% url "ip_reporting:ajax_post_form_ip_report" %}';
+
+    $(document).ready(function() {
+
+    
+    // get movie list
+    $('#client').change(function() {
+        var clientId = $(this).val();
+        console.log("get movie", "ajaxGetMoviesListUrl");
+        if (clientId) {
+            $.ajax({
+                url: ajaxGetMoviesListUrl,
+                data: {
+                    'client_id': clientId
+                },
+                success: function(data) {
+                    $('#movie').empty();
+                    $('#movie').append('<option value="">Select Movie</option>');
+                    $.each(data, function(key, value) {
+                        $('#movie').append('<option value="' + value.id + '">' + value.movie_name + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#movie').empty();
+            $('#movie').append('<option value="">Select movie</option>');
+        }
+    }); // end of ajax
+
+    document.getElementById('movie').addEventListener('change', function() {
+        document.getElementById('ip_report_form').submit();
+    });
+
+
+    });    
+
+</script>
+{% endblock %}

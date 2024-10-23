@@ -1,0 +1,498 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr"
+  data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>BX | {% block title %} {% endblock %}</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon/favicon.ico' %}" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/fonts/boxicons.css' %}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/css/core.css' %}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{% static 'assets/vendor/css/theme-default.css' %}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}"/>
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'assets/vendor/libs/apex-charts/apex-charts.css' %}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{% static 'assets/vendor/js/helpers.js' %}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{% static 'assets/js/config.js' %}"></script>
+      <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Boxicons JS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/dist/boxicons.js' >
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js"></script>
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap5.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        {% include 'menubar.html' %}
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          {% include 'base_navbar.html' %}
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- toast starts -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade top-0 end-0 hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold">Notification</div>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">msg</div>
+              </div>
+              <!-- toast ends -->
+
+                <!-- Block start -->
+
+              <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header"> this is blank temmplate</h5>
+
+
+
+
+                <table id="datatableExp" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011-04-25</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+                <td>2011-07-25</td>
+                <td>$170,750</td>
+            </tr>
+            <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>66</td>
+                <td>2009-01-12</td>
+                <td>$86,000</td>
+            </tr>
+            <tr>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>22</td>
+                <td>2012-03-29</td>
+                <td>$433,060</td>
+            </tr>
+            <tr>
+                <td>Airi Satou</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>33</td>
+                <td>2008-11-28</td>
+                <td>$162,700</td>
+            </tr>
+            <tr>
+                <td>Brielle Williamson</td>
+                <td>Integration Specialist</td>
+                <td>New York</td>
+                <td>61</td>
+                <td>2012-12-02</td>
+                <td>$372,000</td>
+            </tr>
+            <tr>
+                <td>Herrod Chandler</td>
+                <td>Sales Assistant</td>
+                <td>San Francisco</td>
+                <td>59</td>
+                <td>2012-08-06</td>
+                <td>$137,500</td>
+            </tr>
+            <tr>
+                <td>Rhona Davidson</td>
+                <td>Integration Specialist</td>
+                <td>Tokyo</td>
+                <td>55</td>
+                <td>2010-10-14</td>
+                <td>$327,900</td>
+            </tr>
+            <tr>
+                <td>Colleen Hurst</td>
+                <td>Javascript Developer</td>
+                <td>San Francisco</td>
+                <td>39</td>
+                <td>2009-09-15</td>
+                <td>$205,500</td>
+            </tr>
+            <tr>
+                <td>Sonya Frost</td>
+                <td>Software Engineer</td>
+                <td>Edinburgh</td>
+                <td>23</td>
+                <td>2008-12-13</td>
+                <td>$103,600</td>
+            </tr>
+            <tr>
+                <td>Jena Gaines</td>
+                <td>Office Manager</td>
+                <td>London</td>
+                <td>30</td>
+                <td>2008-12-19</td>
+                <td>$90,560</td>
+            </tr>
+          <tr>
+                <td>Donna Snider</td>
+                <td>Customer Support</td>
+                <td>New York</td>
+                <td>27</td>
+                <td>2011-01-25</td>
+                <td>$112,000</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+                <!-- Block end-->
+            </div>
+            <!-- / Content -->
+
+            <!-- Footer
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                </div>
+              </div>
+            </footer>
+            -->
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    
+    <script src="{% static 'assets/js/bx_custom.js' %}"></script>
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="{% static 'assets/vendor/libs/jquery/jquery.js' %}"></script>
+    <script src="{% static 'assets/vendor/libs/popper/popper.js' %}"></script>
+    <script src="{% static 'assets/vendor/js/bootstrap.js' %}"></script>
+    <script src="{% static 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+
+    <script src="{% static 'assets/vendor/js/menu.js' %}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="{% static 'assets/vendor/libs/apex-charts/apexcharts.js' %}"></script>
+
+    <!-- Main JS -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <!-- Page JS -->
+    <script src="{% static 'assets/js/dashboards-analytics.js' %}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- BX custom js scripts-->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var dataTable = $('#datatableExp').DataTable({
+                "processing": true,
+                "dom": 'lBfrtip',
+                "buttons": ['excel', 'csv', 'pdf', 'copy'],
+                "lengthMenu": [10, 50, 100, 500, 1000, 2000, 5000, 10000],
+                "order": [],
+                "scrollX": true,
+                "scrollCollapse": true
+            });
+
+            dataTable.buttons().container()
+                .appendTo('#datatableExp_wrapper .col-md-6:eq(0)');
+
+            $("#datatableExp_length").css("margin", "10px");
+        });
+    </script>
+  </body>
+</html>
+
+
+
+<!--{% block content %}-->
+<!--    <div class="row">-->
+<!--        <div class="col-12">-->
+<!--            <div class="card">-->
+<!--                <h5 class="card-header"> this is blank temmplate</h5>-->
+
+
+
+
+<!--                <table id="datatableExp" class="table table-striped" style="width:100%">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>Name</th>-->
+<!--                <th>Position</th>-->
+<!--                <th>Office</th>-->
+<!--                <th>Age</th>-->
+<!--                <th>Start date</th>-->
+<!--                <th>Salary</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            <tr>-->
+<!--                <td>Tiger Nixon</td>-->
+<!--                <td>System Architect</td>-->
+<!--                <td>Edinburgh</td>-->
+<!--                <td>61</td>-->
+<!--                <td>2011-04-25</td>-->
+<!--                <td>$320,800</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Garrett Winters</td>-->
+<!--                <td>Accountant</td>-->
+<!--                <td>Tokyo</td>-->
+<!--                <td>63</td>-->
+<!--                <td>2011-07-25</td>-->
+<!--                <td>$170,750</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Ashton Cox</td>-->
+<!--                <td>Junior Technical Author</td>-->
+<!--                <td>San Francisco</td>-->
+<!--                <td>66</td>-->
+<!--                <td>2009-01-12</td>-->
+<!--                <td>$86,000</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Cedric Kelly</td>-->
+<!--                <td>Senior Javascript Developer</td>-->
+<!--                <td>Edinburgh</td>-->
+<!--                <td>22</td>-->
+<!--                <td>2012-03-29</td>-->
+<!--                <td>$433,060</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Airi Satou</td>-->
+<!--                <td>Accountant</td>-->
+<!--                <td>Tokyo</td>-->
+<!--                <td>33</td>-->
+<!--                <td>2008-11-28</td>-->
+<!--                <td>$162,700</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Brielle Williamson</td>-->
+<!--                <td>Integration Specialist</td>-->
+<!--                <td>New York</td>-->
+<!--                <td>61</td>-->
+<!--                <td>2012-12-02</td>-->
+<!--                <td>$372,000</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Herrod Chandler</td>-->
+<!--                <td>Sales Assistant</td>-->
+<!--                <td>San Francisco</td>-->
+<!--                <td>59</td>-->
+<!--                <td>2012-08-06</td>-->
+<!--                <td>$137,500</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Rhona Davidson</td>-->
+<!--                <td>Integration Specialist</td>-->
+<!--                <td>Tokyo</td>-->
+<!--                <td>55</td>-->
+<!--                <td>2010-10-14</td>-->
+<!--                <td>$327,900</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Colleen Hurst</td>-->
+<!--                <td>Javascript Developer</td>-->
+<!--                <td>San Francisco</td>-->
+<!--                <td>39</td>-->
+<!--                <td>2009-09-15</td>-->
+<!--                <td>$205,500</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Sonya Frost</td>-->
+<!--                <td>Software Engineer</td>-->
+<!--                <td>Edinburgh</td>-->
+<!--                <td>23</td>-->
+<!--                <td>2008-12-13</td>-->
+<!--                <td>$103,600</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Jena Gaines</td>-->
+<!--                <td>Office Manager</td>-->
+<!--                <td>London</td>-->
+<!--                <td>30</td>-->
+<!--                <td>2008-12-19</td>-->
+<!--                <td>$90,560</td>-->
+<!--            </tr>-->
+<!--          <tr>-->
+<!--                <td>Donna Snider</td>-->
+<!--                <td>Customer Support</td>-->
+<!--                <td>New York</td>-->
+<!--                <td>27</td>-->
+<!--                <td>2011-01-25</td>-->
+<!--                <td>$112,000</td>-->
+<!--            </tr>-->
+<!--        </tbody>-->
+<!--        <tfoot>-->
+<!--            <tr>-->
+<!--                <th>Name</th>-->
+<!--                <th>Position</th>-->
+<!--                <th>Office</th>-->
+<!--                <th>Age</th>-->
+<!--                <th>Start date</th>-->
+<!--                <th>Salary</th>-->
+<!--            </tr>-->
+<!--        </tfoot>-->
+<!--    </table>-->
+
+
+
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+
+
+<!--{% endblock %}-->
+
+
+
+
+
+
+
+
+
+
+

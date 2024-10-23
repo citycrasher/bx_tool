@@ -17,5 +17,8 @@ class client_admin_view(admin.ModelAdmin):
 admin.site.register(Client, client_admin_view)
 
 
-admin.site.register(User_url_report)
 admin.site.register(Youtube_Url_Model)
+admin.site.register(Services)
+admin.site.register(Movie)
+admin.site.register(AppConfig)
+admin.site.register(IP_Report)

@@ -1,0 +1,63 @@
+<!-- your_app/templates/your_app/client_list.html -->
+{% extends 'base.html' %}
+{% block title %} IP REPORT | {{movie_obj.client}} Report {% endblock %}
+{% block content %}
+
+<div class="card">
+<!--                <h5 class="card-header col">IP REPORT | {{movie_obj.client}} | {{movie_obj.movie_name}}</h5>-->
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="col mb-0">IP REPORT | {{movie_obj.client}} | {{movie_obj.movie_name}}</h5>
+<!--                    <button class="btn btn-primary">Action</button>-->
+                </div>
+<!--                <h5 class="card-header">IP REPORT | {{movie_obj.client}} | {{movie_obj.movie_name}}</h5>-->
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-hover display table-responsive text-nowrap" id="clientTable" >
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Report ID</th>
+                        <th>Request ID</th>
+                        <th>Original Work</th>
+                        <th>Report URL</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for data in datas %}
+                      <tr>
+                        <td>{{data.time_stamp}}</td>
+                        <td>
+                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{data.client__client_name}}</strong>
+                        </td>
+                        <td>{{data.report_id}}</td>
+                        <td>
+                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{data.request_id}}</strong>
+                        </td>
+                        <td>{% if data.original_type == 'VIDEO' %}
+                            <i class='bx bx-video'></i>
+                            {% elif data.original_type == 'PHOTO' %}
+                            <i class='bx bx-image'></i>
+                            {% elif data.original_type == 'ARTWORK' %}
+                            <i class='bx bx-palette'></i>
+                            {% else %}
+                            <i class='bx bx-library'></i>
+                            {% endif %}
+                          </td>
+                          <td><a href="{{data.report_url}}">{{data.report_url}}</a></td>
+                          <td>{% if data.status == 'PENDING' %}
+                              <span class="badge bg-label-danger me-1">{{data.status}}</span>
+                              {% elif data.status == 'REMOVED' %}
+                                <span class="badge bg-label-success me-1">REMOVED</span>
+                              {% elif data.status == 'REPORTED' %}
+                                <span class="badge bg-label-warning me-1">REPORTED</span>
+                              {% endif %}
+                          </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+{% endblock content %}

@@ -32,4 +32,5 @@ urlpatterns = [
     path('add_client_view', views.add_client_view, name='add_client_view'),
 
     path('search/', views.search, name='search')
+
 ]

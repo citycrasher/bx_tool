@@ -16,13 +16,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler403, handler404
+from django.shortcuts import render
 from django.conf.urls.static import static
 from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('youtube.urls')),   # youtube
-    path('accounts/', include('accounts.urls'))   # accounts
+    path('accounts/', include('accounts.urls')),   # accounts
+    path('ip_reporting/', include('ip_reporting.urls')) # IP reporting
 ]
 
-# urlpatterns = urlpatterns+ static(settings)
+# Define a view for the 403 error
+def custom_permission_denied_view(request, exception):
+    return render(request, '403.html', status=403)
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
+
+
+
+# Set the handler
+handler403 = custom_permission_denied_view
+handler404 = custom_404_view
+
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# print(static(settings.STATIC_URL, document_root=[settings.STATIC_ROOT]))

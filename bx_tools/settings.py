@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-y8n!u8sxdo!(!+=^u!fjj1%6apyd#2f$fe4)qe5v2*&nd=sb%+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
+
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'youtube'
+    'youtube',
+    'ip_reporting'
 ]
 
 MIDDLEWARE = [
@@ -49,9 +51,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware'
-
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
+
 
 ROOT_URLCONF = 'bx_tools.urls'
 
@@ -131,16 +133,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'
-
+#STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'template/static')]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'assets/')
 
 
 
@@ -149,3 +152,4 @@ LOGIN_REDIRECT_URL = 'youtube:home_view'  # Replace 'home' with the appropriate 
 
 # Specify the logout redirect URL
 LOGOUT_REDIRECT_URL = 'accounts:login'  # Replace 'login' with the appropriate URL name or path
+
